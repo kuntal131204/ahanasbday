@@ -3,76 +3,116 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Birthday Wish</title>
+  <title>Happy Birthday</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #74b9ff, #a29bfe, #fd79a8);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Poppins', sans-serif;
-      color: white;
-      text-align: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       overflow: hidden;
+      font-family: "Poppins", sans-serif;
     }
 
-    h1 {
+    .message-box {
+      text-align: center;
+      color: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.35);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+      animation: fadeIn 2s ease;
+      max-width: 800px;
+    }
+
+    .message-box h1 {
       font-size: 3rem;
-      text-shadow: 0 0 20px #fff, 0 0 40px #ffeaa7, 0 0 60px #fd79a8;
-      animation: glow 2s ease-in-out infinite alternate;
-      z-index: 10;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
     }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #ffeaa7, 0 0 20px #fd79a8; }
-      to   { text-shadow: 0 0 30px #fff, 0 0 60px #55efc4; }
+    .message-box p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      animation: fadeInUp 3s ease;
+      white-space: normal;
+      border-right: none;
     }
 
-    /* Floating Hearts */
-    .heart {
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Sparkles */
+    .sparkle {
       position: absolute;
-      bottom: -50px;
-      color: #ff6b81;
-      font-size: 2rem;
-      animation: floatUp 8s linear infinite;
-      opacity: 0.8;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      animation: sparkle 6s linear infinite;
+      opacity: 0.9;
     }
 
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 0.8; }
-      100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    @keyframes sparkle {
+      from {
+        transform: translateY(100vh) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh) scale(0.5);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>💖 Wishing you endless happiness, love & surprises on your special day, Ahana! 🎂✨</h1>
-
-  <!-- Background Birthday Music -->
+  <!-- Background Music -->
   <audio autoplay loop>
     <source src="birthday.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
-  <script>
-    // Floating hearts generator
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "💖";
-      document.body.appendChild(heart);
+  <!-- Sparkles -->
+  <div class="sparkle" style="left: 5%; animation-delay: 0s;"></div>
+  <div class="sparkle" style="left: 20%; animation-delay: 1s;"></div>
+  <div class="sparkle" style="left: 40%; animation-delay: 2s;"></div>
+  <div class="sparkle" style="left: 60%; animation-delay: 3s;"></div>
+  <div class="sparkle" style="left: 80%; animation-delay: 4s;"></div>
+  <div class="sparkle" style="left: 95%; animation-delay: 5s;"></div>
 
-      // random position & size
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-      heart.style.animationDuration = (Math.random() * 4 + 4) + "s";
-
-      // remove after animation
-      setTimeout(() => { heart.remove(); }, 8000);
-    }
-
-    setInterval(createHeart, 400);
-  </script>
+  <!-- Message -->
+  <div class="message-box">
+    <h1>🎉 Happy Birthday Ahana 🎉</h1>
+    <p>
+      On this very special day, I wish you endless smiles, warm hugs, and magical moments  
+      that will stay with you forever. May every dream you chase turn into reality,  
+      and may your heart be filled with love, laughter, and blessings all year long. 💖✨  
+      <br><br>
+      Here’s to more adventures, more surprises, and more reasons to celebrate YOU.  
+      Have the most wonderful birthday ever! 🎂🎁🌸
+    </p>
+  </div>
 </body>
 </html>
