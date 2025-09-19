@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Birthday Wish</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #74b9ff, #a29bfe, #fd79a8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-shadow: 0 0 20px #fff, 0 0 40px #ffeaa7, 0 0 60px #fd79a8;
+      animation: glow 2s ease-in-out infinite alternate;
+      z-index: 10;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ffeaa7, 0 0 20px #fd79a8; }
+      to   { text-shadow: 0 0 30px #fff, 0 0 60px #55efc4; }
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      color: #ff6b81;
+      font-size: 2rem;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Wishing you endless happiness, love & surprises on your special day, Ahana! 🎂✨</h1>
+
+  <!-- Background Birthday Music -->
+  <audio autoplay loop>
+    <source src="birthday.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Floating hearts generator
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      document.body.appendChild(heart);
+
+      // random position & size
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+      heart.style.animationDuration = (Math.random() * 4 + 4) + "s";
+
+      // remove after animation
+      setTimeout(() => { heart.remove(); }, 8000);
+    }
+
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>

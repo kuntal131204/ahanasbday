@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Surprise</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 0 0 20px #ff5e57, 0 0 40px #ff5e57;
+      animation: glow 2s ease-in-out infinite alternate;
+      margin-bottom: 50px;
+      z-index: 10;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff7675, 0 0 20px #ff7675; }
+      to   { text-shadow: 0 0 30px #d63031, 0 0 60px #d63031; }
+    }
+
+    .click-text {
+      font-size: 1.5rem;
+      color: #ffeaa7;
+      margin-bottom: 20px;
+      animation: pulse 1.5s infinite;
+      font-weight: bold;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.7; }
+    }
+
+    /* Gift Box */
+    .gift {
+      width: 120px;
+      height: 120px;
+      position: relative;
+      cursor: pointer;
+      animation: shake 1s infinite;
+    }
+
+    .box {
+      width: 100%;
+      height: 100%;
+      background: #ff7675;
+      position: absolute;
+      bottom: 0;
+      border-radius: 10px;
+    }
+
+    .lid {
+      width: 130px;
+      height: 30px;
+      background: #d63031;
+      position: absolute;
+      top: -30px;
+      left: -5px;
+      border-radius: 5px;
+      transition: transform 1s ease;
+      transform-origin: bottom;
+    }
+
+    .ribbon {
+      width: 20px;
+      height: 100%;
+      background: #ffeaa7;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .ribbon::after {
+      content: '';
+      width: 100%;
+      height: 20px;
+      background: #ffeaa7;
+      position: absolute;
+      top: 40%;
+      left: -50px;
+      right: -50px;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(2deg); }
+      50% { transform: rotate(-2deg); }
+      75% { transform: rotate(2deg); }
+    }
+
+    /* Balloons */
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 70px;
+      height: 90px;
+      border-radius: 50%;
+      background: red;
+      animation: float 10s infinite ease-in;
+      opacity: 0.8;
+      z-index: 5;
+    }
+    .balloon::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 50px;
+      background: #555;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .balloon:nth-child(1) { left: 10%; background: #ff7675; animation-delay: 0s; }
+    .balloon:nth-child(2) { left: 25%; background: #74b9ff; animation-delay: 3s; }
+    .balloon:nth-child(3) { left: 45%; background: #55efc4; animation-delay: 6s; }
+    .balloon:nth-child(4) { left: 65%; background: #ffeaa7; animation-delay: 1s; }
+    .balloon:nth-child(5) { left: 85%; background: #fd79a8; animation-delay: 5s; }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0.9; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 15px;
+      background: gold;
+      animation: fall 5s linear infinite;
+      opacity: 0.8;
+      z-index: 2;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Happy Birthday Ahana 🎂</h1>
+
+  <div class="click-text">👉 Click the Gift 🎁</div>
+
+  <!-- Gift Box -->
+  <div class="gift" onclick="openGift()">
+    <div class="lid"></div>
+    <div class="box">
+      <div class="ribbon"></div>
+    </div>
+  </div>
+
+  <!-- Balloons -->
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+
+  <!-- Click Sound -->
+  <audio id="clickSound">
+    <source src="click.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Confetti generator
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      document.body.appendChild(confetti);
+
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.background = `hsl(${Math.random()*360}, 100%, 50%)`;
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+      setTimeout(() => { confetti.remove(); }, 5000);
+    }
+    setInterval(createConfetti, 200);
+
+    // Gift opening
+    function openGift() {
+      const lid = document.querySelector(".lid");
+      const sound = document.getElementById("clickSound");
+      lid.style.transform = "rotateX(120deg)";
+      
+      // play click sound
+      sound.play();
+
+      // go to wish page after short delay
+      setTimeout(() => {
+        window.location.href = "wish.html";
+      }, 800);
+    }
+  </script>
+</body>
+</html>
